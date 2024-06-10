@@ -129,10 +129,10 @@ class Platformer extends Phaser.Scene {
                 yoyo: true,
             },
             scale: {start: 0.001, end: 0.03},
-            // TODO: Try: maxAliveParticles: 8,
+
             maxAliveParticles: 8,
             lifespan: 500,
-            // TODO: Try: gravityY: -400,
+
             gravityY: -200,
             //quantity: 250,
             tintFill: 0xFFFF00,
