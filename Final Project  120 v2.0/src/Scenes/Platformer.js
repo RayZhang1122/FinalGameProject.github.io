@@ -66,11 +66,6 @@ class Platformer extends Phaser.Scene {
         });
 
 
-        this.coins.map((coin) => {
-            coin.x *= 1;
-            coin.y *= 1;
-            coin.setScale(1);
-        });
 
 
         this.physics.world.enable(this.coins, Phaser.Physics.Arcade.STATIC_BODY);
@@ -91,17 +86,15 @@ class Platformer extends Phaser.Scene {
             collects.play(); 
         });
 
-        this.flags = this.map.createFromObjects("Flag", {
-            name: "Flag",
+        this.flag = this.map.createFromObjects("Objects", {
+            name: "flag",
             key: "tilemap_sheet",
-            frame: 111
+            frame: 112
         });
 
-        this.physics.world.enable(this.flags, Phaser.Physics.Arcade.STATIC_BODY);
-
-        this.flagGroup = this.add.group(this.flags);
+        this.physics.world.enable(this.flag, Phaser.Physics.Arcade.STATIC_BODY);
         
-        this.physics.add.overlap(my.sprite.player, this.flagGroup, (obj1, obj2) => {
+        this.physics.add.overlap(my.sprite.player, this.flag, (obj1, obj2) => {
             const wins = this.sound.add("wins");
             wins.play();
             const endText = this.add.text(1320, 100, "YOU WIN", {
@@ -132,36 +125,6 @@ class Platformer extends Phaser.Scene {
             }, this);
         });
 
-        this.spikes = this.map.createFromObjects("Spikes", {
-            name: "spike",
-            key: "tilemap_sheet",
-            frame: 68
-        });
-
-        this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
-        this.spikeGroup = this.add.group(this.spikes);
-
-        this.physics.add.overlap(my.sprite.player, this.spikeGroup, (obj1, obj2) => {
-            const dies = this.sound.add("dies");
-            dies.play();
-
-            my.sprite.player.setVelocity(0, 0);
-            my.sprite.player.body.moves = false;
-
-            this.lives -= 1;
-            this.livesNum.setText(this.lives.toString());
-            if(this.lives === 0) {
-                this.lives = 3;
-                this.score = 0;
-                this.scoreNum = 0;
-                this.scene.start("endingScene");
-            }
-            else {
-                this.score = 0;
-                this.scoreNum = 0;
-                this.scene.restart();
-            }         
-        });
 
         this.powerups = this.map.createFromObjects("powerup", {
             name: "uparrow",
@@ -273,6 +236,9 @@ class Platformer extends Phaser.Scene {
 
     playerHitFire(player, fire) {
         // hit fire and restart the scene.
+        this.lives = 3;
+        this.score = 0;
+        this.scoreNum = 0;
         this.scene.start("endingScene");
     }
 

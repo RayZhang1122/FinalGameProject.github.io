@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="100" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="89">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="100" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="109">
  <editorsettings>
-  <export format="json"/>
+  <export target="platformer-level-1.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="2D Space Station Tile Set Assets" tilewidth="16" tileheight="16" tilecount="2600" columns="50">
   <image source="2D Space Station Tile Set Assets.png" width="806" height="844"/>
@@ -12815,6 +12815,19 @@
  <tileset firstgid="5161" name="space_tileset" tilewidth="16" tileheight="16" tilecount="252" columns="14">
   <image source="tileset.png" width="224" height="288"/>
  </tileset>
+ <tileset firstgid="5413" name="tilemap_packed" tilewidth="18" tileheight="18" tilecount="180" columns="20">
+  <image source="tilemap_packed.png" width="360" height="162"/>
+  <tile id="112">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="151">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer id="2" name="Background" width="100" height="20">
   <data encoding="csv">
 578,279,576,380,577,422,430,371,625,423,271,174,279,230,479,526,173,626,223,280,425,480,171,479,221,523,524,528,2818,2819,2820,2821,529,273,324,279,530,276,578,629,630,279,328,473,175,575,279,372,472,424,522,471,221,573,222,471,578,572,627,2890,2842,5191,5191,5191,5191,5206,5192,5191,5206,5206,5205,5192,5206,5205,5205,5191,5206,5205,5191,5192,5191,5191,5191,5191,5192,5205,5192,5205,5192,325,376,5191,5206,5206,5206,5206,5206,5206,5192,5192,
@@ -12890,7 +12903,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2737,2738,2739,2740,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2722,2770,2770,2770,2770,2770,2770,2770,2770,2770,2770,2770,2770,2770,2770,2770,2770,2771,2772,2773,2962,2962,2962,2962,2962,2962,2963,2964,2966,2825,2826
 </data>
  </layer>
- <objectgroup id="5" name="MovingSpikes"/>
  <layer id="9" name="SpikesLayer" width="100" height="20">
   <properties>
    <property name="collides" type="bool" value="false"/>
@@ -12945,6 +12957,25 @@
  <objectgroup id="6" name="powerup">
   <object id="86" name="uparrow" gid="3647" x="438.5" y="205.5" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="4" name="Flag"/>
- <objectgroup id="3" name="Objects"/>
+ <objectgroup id="3" name="Objects">
+  <object id="89" name="coin" gid="5564" x="527" y="94" width="18" height="18"/>
+  <object id="90" name="coin" gid="5564" x="2" y="317" width="18" height="18"/>
+  <object id="92" name="coin" gid="5564" x="473" y="277" width="18" height="18"/>
+  <object id="93" name="coin" gid="5564" x="1151" y="253" width="18" height="18"/>
+  <object id="94" name="flag" gid="5525" x="1577" y="287.667" width="18" height="18"/>
+  <object id="95" name="coin" gid="5564" x="239" y="144" width="18" height="18"/>
+  <object id="96" name="coin" gid="5564" x="335" y="177" width="18" height="18"/>
+  <object id="97" name="coin" gid="5564" x="646" y="217" width="18" height="18"/>
+  <object id="98" name="coin" gid="5564" x="742" y="153" width="18" height="18"/>
+  <object id="99" name="coin" gid="5564" x="904" y="204" width="18" height="18"/>
+  <object id="100" name="coin" gid="5564" x="990" y="173" width="18" height="18"/>
+  <object id="101" name="coin" gid="5564" x="1039" y="274" width="18" height="18"/>
+  <object id="102" name="coin" gid="5564" x="1039" y="254" width="18" height="18"/>
+  <object id="103" name="coin" gid="5564" x="1303" y="171" width="18" height="18"/>
+  <object id="104" name="coin" gid="5564" x="1198" y="107" width="18" height="18"/>
+  <object id="105" name="coin" gid="5564" x="1574" y="233" width="18" height="18"/>
+  <object id="106" name="coin" gid="5564" x="24" y="317" width="18" height="18"/>
+  <object id="107" name="coin" gid="5564" x="47" y="318" width="18" height="18"/>
+  <object id="108" name="coin" gid="5564" x="73" y="319" width="18" height="18"/>
+ </objectgroup>
 </map>
