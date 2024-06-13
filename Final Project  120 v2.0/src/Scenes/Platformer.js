@@ -42,9 +42,18 @@ class Platformer extends Phaser.Scene {
         this.groundLayer = this.map.createLayer("Ground-n-Platforms", [this.tilesetWall, this.tilesetTraps], 0, 0);
         this.backitemLayer = this.map.createLayer("Background_frontItems", this.tilesetTraps, 0, 0);//background layer
         this.spikesLayer = this.map.createLayer("SpikesLayer", this.tilesetTraps, 0, 0);// 一碰就死
+        this.fireLayer = this.map.createLayer("FireLayer", this.tilesetTraps, 0, 0);
         
         // Make it collidable
         this.groundLayer.setCollisionByProperty({
+            collides: true
+        });
+
+        this.spikesLayer.setCollisionByProperty({
+            collides: true
+        });
+
+        this.fireLayer.setCollisionByProperty({
             collides: true
         });
 
@@ -69,6 +78,8 @@ class Platformer extends Phaser.Scene {
         my.sprite.player = this.physics.add.sprite(10, 180, "platformer_characters", "tile_0000.png");
         my.sprite.player.setCollideWorldBounds(true);
         this.physics.add.collider(my.sprite.player, this.groundLayer);
+        this.physics.add.collider(my.sprite.player, this.spikesLayer, this.playerHitSpikes, null, this);
+        this.physics.add.collider(my.sprite.player, this.fireLayer, this.playerHitFire, null, this);
 
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
             obj2.destroy();
@@ -231,6 +242,15 @@ class Platformer extends Phaser.Scene {
             fontSize: 23,
             color: "#1E90FF"
         });
+    }
+
+    playerHitSpikes(player, spikes) {
+        // hit spikes -1 hp
+    }
+
+    playerHitFire(player, fire) {
+        // hit fire and restart the scene.
+        this.scene.start("endingScene");
     }
 
     update() {
