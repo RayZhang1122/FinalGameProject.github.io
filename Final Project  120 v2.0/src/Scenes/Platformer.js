@@ -6,6 +6,7 @@ class Platformer extends Phaser.Scene {
         this.scoreNum = 0;
         this.lives = 3;
         this.livesNum = null;
+        this.invincible;
     }
 
     init() {
@@ -16,6 +17,7 @@ class Platformer extends Phaser.Scene {
         this.JUMP_VELOCITY = -500;
         this.PARTICLE_VELOCITY = 50;
         this.SCALE = 1.5;
+        this.invincible= false;
     }
 
     preload() {
@@ -245,7 +247,28 @@ class Platformer extends Phaser.Scene {
     }
 
     playerHitSpikes(player, spikes) {
-        // hit spikes -1 hp
+        if (!this.invincible) { // 如果不是无敌状态
+            this.lives -= 1;
+            this.livesNum.setText(this.lives.toString());
+            this.invincible = true; // 设置为无敌状态
+            // 播放受伤音效
+            const dies = this.sound.add("dies");
+            dies.play();
+
+            // 设定1秒后取消无敌状态
+            this.time.delayedCall(1000, () => {
+                this.invincible = false;
+            }, [], this);
+
+            // 如果生命值为0，则重新启动场景
+            if (this.lives === 0) {
+                this.lives = 3;
+                this.score = 0;
+                this.scoreNum = 0;
+                this.scene.start("endingScene");
+            }
+        }
+
     }
 
     playerHitFire(player, fire) {

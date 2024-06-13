@@ -26,4 +26,5 @@ class Ending extends Phaser.Scene {
     }
 
     update() {}
+    
 }
