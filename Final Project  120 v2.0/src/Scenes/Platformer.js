@@ -21,10 +21,10 @@ class Platformer extends Phaser.Scene {
     preload() {
         this.load.setPath("./assets/");
         this.load.audio("wins", ["jingles_SAX16.ogg"]);
-        this.load.audio("jumps", ["error_004.ogg"]);
-        this.load.audio("collects", ["confirmation_003.ogg"]);
-        this.load.audio("dies", ["laserRetro_001.ogg"]);
-        this.load.audio("power", ["jump-15984.mp3"]);
+        this.load.audio("jumps", ["error_004.mp3"]);
+        this.load.audio("collects", ["collects.ogg"]);
+        this.load.audio("dies", ["激光.ogg"]);
+        this.load.audio("power", ["power.mp3"]);
     }
 
     create() {
@@ -68,13 +68,10 @@ class Platformer extends Phaser.Scene {
 
         my.sprite.player = this.physics.add.sprite(10, 180, "platformer_characters", "tile_0000.png");
         my.sprite.player.setCollideWorldBounds(true);
-
-        // Enable collision handling
         this.physics.add.collider(my.sprite.player, this.groundLayer);
 
-        // Handle collision detection with coins
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
-            obj2.destroy(); // remove coin on overlap
+            obj2.destroy();
             this.score += 1;
             this.scoreNum.setText(this.score.toString());
             const collects = this.sound.add("collects");
@@ -154,9 +151,9 @@ class Platformer extends Phaser.Scene {
         });
 
         this.powerups = this.map.createFromObjects("powerup", {
-            name: "Powerups",
-            key: "tilemap_sheet",
-            frame: 67
+            name: "uparrow",
+            key: "traps",
+            id: 662
         });
 
         this.physics.world.enable(this.powerups, Phaser.Physics.Arcade.STATIC_BODY);
@@ -184,13 +181,10 @@ class Platformer extends Phaser.Scene {
         // TODO: Add movement vfx here
         my.vfx.walking = this.add.particles(0, 0, "kenny-particles", {
             frame: ['dirt_01.png', 'dirt_03.png'],
-            //Try: add random: true
             random: true,
             scale: {start: 0.03, end: 0.08},
-            //Try: maxAliveParticles: 8,
             maxAliveParticles: 5,
             lifespan: 350,
-            //Try: gravityY: -400,
             gravityY: -40,
             alpha: {start: 1, end: 0.1}, 
         });
@@ -213,27 +207,26 @@ class Platformer extends Phaser.Scene {
 
         // TODO: add camera code here
         this.cameras.main.setBounds(0, 0, 100*18 , 20*18);
-
-        this.cameras.main.startFollow(my.sprite.player, true, 0.2, 0.2); // (target, [,roundPixels][,lerpX][,lerpY])
+        this.cameras.main.startFollow(my.sprite.player, true, 0.2, 0.2);
         this.cameras.main.setDeadzone(400, 200);
         this.cameras.main.setZoom(2);
-        
-        this.add.text(15, 370, "Coins: ", {
+    
+        this.add.text(15, 350, "Coins: ", {
             fontFamily: "Arial",
             fontSize: 23,
             color: "#2ECC71"
         });
-        this.scoreNum = this.add.text(85, 370, this.score.toString(), {
+        this.scoreNum = this.add.text(85, 350, this.score.toString(), {
             fontFamily: "Arial",
             fontSize: 23,
             color: "#FFAA00"
         });
-        const livesText = this.add.text(15, 394, "Lives: ", {
+        const livesText = this.add.text(15, 374, "Lives: ", {
             fontFamily: "Arial",
             fontSize: 23,
             color: "#2ECC71"
         });
-        this.livesNum = this.add.text(85, 394, this.lives.toString(), {
+        this.livesNum = this.add.text(85, 374, this.lives.toString(), {
             fontFamily: "Arial",
             fontSize: 23,
             color: "#1E90FF"
@@ -246,12 +239,8 @@ class Platformer extends Phaser.Scene {
             my.sprite.player.setAccelerationX(-this.ACCELERATION);
             my.sprite.player.resetFlip();
             my.sprite.player.anims.play('walk', true);
-            // TODO: add particle following code here
             my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth/2-5, my.sprite.player.displayHeight/2-5, false);
-
             my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
-
-            // Only play smoke effect if touching the ground
 
             if (my.sprite.player.body.blocked.down) {
                 my.vfx.walking.start();
@@ -263,28 +252,22 @@ class Platformer extends Phaser.Scene {
             my.sprite.player.setAccelerationX(this.ACCELERATION);
             my.sprite.player.setFlip(true, false);
             my.sprite.player.anims.play('walk', true);
-            // TODO: add particle following code here
             my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth/2-15, my.sprite.player.displayHeight/2-5, false);
 
             my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
-
-            // Only play smoke effect if touching the ground
 
             if (my.sprite.player.body.blocked.down) {
                 my.vfx.walking.start();
             }
 
         } else {
-            // Set acceleration to 0 and have DRAG take over
             my.sprite.player.setAccelerationX(0);
             my.sprite.player.setDragX(this.DRAG);
             my.sprite.player.anims.play('idle');
-            // TODO: have the vfx stop playing
             my.vfx.walking.stop();
         }
 
         // player jump
-        // note that we need body.blocked rather than body.touching b/c the former applies to tilemap tiles and the latter to the "ground"
         if(!my.sprite.player.body.blocked.down) {
             my.sprite.player.anims.play('jump');
         }
