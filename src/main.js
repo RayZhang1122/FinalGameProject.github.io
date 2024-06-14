@@ -1,3 +1,4 @@
+// debug with extreme prejudice
 "use strict"
 
 // game config
@@ -18,12 +19,23 @@ let config = {
         }
     },
     width: 1440,
-    height: 720,
-    scene: [Load, Platformer]
+    height: 800,
+    scene: [Title, Load, Platformer, Ending]
 }
+
+
+
+
+
+
+
+
+
+
+
 
 var cursors;
 const SCALE = 2.0;
-var my = {sprite: {}, text: {}};
+var my = {sprite: {}, text: {}, vfx: {}};
 
 const game = new Phaser.Game(config);

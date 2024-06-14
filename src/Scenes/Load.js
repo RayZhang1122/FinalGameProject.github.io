@@ -5,12 +5,31 @@ class Load extends Phaser.Scene {
 
     preload() {
         this.load.setPath("./assets/");
-        this.load.bitmapFont('text', 'bitmapfont.png', 'bitmapfont.xml');
+
+        // Load characters spritesheet
         this.load.atlas("platformer_characters", "tilemap-characters-packed.png", "tilemap-characters-packed.json");
-        this.load.image("tilemap_tiles", "tilemap_packed.png");
-        this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");
+
+        // Load tilemap information
+        this.load.image("tilemap_tiles", "tilemap_packed.png");                         // Packed tilemap
+        this.load.image("2D Space Station Tile Set Assets", "2D Space Station Tile Set Assets.png");
+        this.load.image("space_tileset", "tileset.png");
+        this.load.image("Space-wall-Tileset", "Space-wall-Tileset.png");
+
+        this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");   // Tilemap in JSON
+
+        // Load the tilemap as a spritesheet
+        this.load.spritesheet("tilemap_sheet", "tilemap_packed.png", {
+            frameWidth: 18,
+            frameHeight: 18
+        });
+        this.load.image("traps", "traps.png",{
+            frameWidth: 18,
+            frameHeight: 18
+        });
+        
         this.load.multiatlas("kenny-particles", "kenny-particles.json");
-        this.load.audio("coin collected sound", ["515736__matrixxx__retro-coin-06.wav"]);
+        
+        this.moveCam = false;
     }
 
     create() {
@@ -43,10 +62,9 @@ class Load extends Phaser.Scene {
                 { frame: "tile_0001.png" }
             ],
         });
-
-
          this.scene.start("platformerScene");
     }
 
-
+    update() {
+    }
 }
