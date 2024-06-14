@@ -14,7 +14,7 @@ class Load extends Phaser.Scene {
         this.load.image("2D Space Station Tile Set Assets", "2D Space Station Tile Set Assets.png");
         this.load.image("space_tileset", "tileset.png");
         this.load.image("Space-wall-Tileset", "Space-wall-Tileset.png");
-        this.load.image("traps", "traps.png");
+
         this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");   // Tilemap in JSON
 
         // Load the tilemap as a spritesheet
@@ -22,7 +22,11 @@ class Load extends Phaser.Scene {
             frameWidth: 18,
             frameHeight: 18
         });
-
+        this.load.image("traps", "traps.png",{
+            frameWidth: 18,
+            frameHeight: 18
+        });
+        
         this.load.multiatlas("kenny-particles", "kenny-particles.json");
         
         this.moveCam = false;

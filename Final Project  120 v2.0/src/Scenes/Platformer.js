@@ -110,7 +110,7 @@ class Platformer extends Phaser.Scene {
             const newScene = this.add.text(1200, 200, "CLICK TO RESTART", {
                 fontFamily: "Arial",
                 fontSize: 48,
-                color: "#FF0000"
+                color: "#FF1166"
             });
 
             my.sprite.player.setVelocity(0, 0);
@@ -129,7 +129,7 @@ class Platformer extends Phaser.Scene {
         this.powerups = this.map.createFromObjects("powerup", {
             name: "uparrow",
             key: "traps",
-            id: 662
+            frame: 662
         });
 
         this.physics.world.enable(this.powerups, Phaser.Physics.Arcade.STATIC_BODY);
@@ -169,19 +169,19 @@ class Platformer extends Phaser.Scene {
 
         my.vfx.jumping = this.add.particles(0, 0, "kenny-particles", {
             frame: ['muzzle_01.png', 'muzzle_05.png'],
-            // TODO: Try: add random: true
+            //Try: add random: true 
             scale: {start: 0.1, end: 0.03},
-            // TODO: Try: maxAliveParticles: 8,
+            //Try: maxAliveParticles: 8,
             maxAliveParticles: 1,
             lifespan: 500,
-            // TODO: Try: gravityY: -400,
+            //Try: gravityY: -400,
             gravityY: 40,
             alpha: {start: 1, end: 0.1}, 
         });
 
         my.vfx.jumping.stop();
 
-        // TODO: add camera code here
+        //camera code here
         this.cameras.main.setBounds(0, 0, 100*18 , 20*18);
         this.cameras.main.startFollow(my.sprite.player, true, 0.2, 0.2);
         this.cameras.main.setDeadzone(400, 200);

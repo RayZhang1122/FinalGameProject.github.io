@@ -23,6 +23,17 @@ let config = {
     scene: [Title, Load, Platformer, Ending]
 }
 
+
+
+
+
+
+
+
+
+
+
+
 var cursors;
 const SCALE = 2.0;
 var my = {sprite: {}, text: {}, vfx: {}};

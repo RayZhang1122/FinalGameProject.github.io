@@ -11,7 +11,7 @@ class Title extends Phaser.Scene {
         const newScene = this.add.text(500, 400, "CLICK TO START", {
             fontFamily: "Arial",
             fontSize: 48,
-            color: "#FFFFFF"
+            color: "#FF1122"
         });
 
         this.input.once("pointerdown", function () {
@@ -19,7 +19,9 @@ class Title extends Phaser.Scene {
         }, this);
     }
 
+
     update ()
     {
+        //there is no update
     }
 }
